@@ -21,22 +21,29 @@ void word_num(char * file){
     FILE *f=NULL;
     int aword=0;
     int cword=0;
-    f=fopen(file,"r");
     char ch=fgetc(f);
-    if((ch>='a'&&ch<='z')||(ch<='Z'&&ch>='A')||ch=='_'){
-        aword=1;
+    f=fopen(file,"r");
+    while(!feof(f)){
+        ch=fgetc(f);
+        if((ch>='a'&&ch<='z')||(ch<='Z'&&ch>='A')||ch=='_'){
+            aword=1;
+        }
+        else if(aword){
+            aword=0;
+            cword++;
+        }
     }
-    else if(aword){
-        aword=0;
-        cword++;
-    }
+    fclose(f);
+    printf("w_num:%d",cword);
+
+
 }
 
 int main(int argc, char* argv[])
 {
     FILE *fp;
     if((fp=fopen(argv[2],"r"))==NULL){
-        printf("¿ÕÎÄ¼þ!");
+        printf("NULL!");
         putchar(10);
         scanf("%s%s%s",argv[0],argv[1],argv[2]);
     }
@@ -47,7 +54,7 @@ int main(int argc, char* argv[])
         c_num(argv[2]);
     }
     else{
-        printf("¿ÕÖ¸Õë!");
+        printf("NULL!");
         putchar(10);
         scanf("%s%s%s",argv[0],argv[1],argv[2]);
     }
