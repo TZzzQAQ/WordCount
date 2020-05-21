@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void c_num(char file){
+void c_num(char * file){
     FILE *f=NULL;
     char c;
     int num=0;
@@ -17,7 +17,7 @@ void c_num(char file){
     printf("c_num:%d",num);
 }
 
-void word_num(char file){
+void word_num(char * file){
     FILE *f=NULL;
     int aword=0;
     int cword=0;
@@ -35,24 +35,21 @@ void word_num(char file){
 int main(int argc, char* argv[])
 {
     FILE *fp;
-    while(1){
-        if((fp=fopen(argv[2],"r"))==NULL){
-            printf("空文件!");
-            putchar(10);
-            scanf("%s%s%s",argv[0],argv[1],argv[2]);
-            continue;
-        }
-        else if(!strcmp(argv[1],"-w")){
-            word_num(argv[2]);
-        }
-        else if(!strcmp(argv[1],"-c")){
-            c_num(argv[2]);
-        }
-        else{
-            printf("空指针!");
-            putchar(10);
-            scanf("%s%s%s",argv[0],argv[1],argv[2]);
-        }
+    if((fp=fopen(argv[2],"r"))==NULL){
+        printf("空文件!");
+        putchar(10);
+        scanf("%s%s%s",argv[0],argv[1],argv[2]);
+    }
+    else if(!strcmp(argv[1],"-w")){
+        word_num(argv[2]);
+    }
+    else if(!strcmp(argv[1],"-c")){
+        c_num(argv[2]);
+    }
+    else{
+        printf("空指针!");
+        putchar(10);
+        scanf("%s%s%s",argv[0],argv[1],argv[2]);
     }
     return 0;
 }
